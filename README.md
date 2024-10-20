@@ -1,7 +1,7 @@
 # zustand-fractal
 
 <p align="center">
-	<img src="https://img.alicdn.com/imgextra/i2/O1CN011N4AN11QnfRWmTt2D_!!6000000002021-0-tps-1024-1024.jpg" alt="Zustand Fractal Logo" />
+  <img src="https://img.alicdn.com/imgextra/i2/O1CN011N4AN11QnfRWmTt2D_!!6000000002021-0-tps-1024-1024.jpg" alt="Zustand Fractal Logo" />
 </p>
 
 [![Version](https://img.shields.io/npm/v/zustand-fractal?style=flat&colorA=000000&colorB=000000)](https://www.npmjs.com/package/zustand-fractal)
@@ -49,15 +49,15 @@ Then use it in your components:
 import { useStore, useActions } from "zustand-fractal";
 
 function BearComponent() {
-	const bears = useStore(BearStore, (state) => state.bears);
-	const bearsActions = useActions(BearStore);
+  const bears = useStore(BearStore, (state) => state.bears);
+  const bearsActions = useActions(BearStore);
 
-	return (
-		<div>
-			<h1>{bears} bears</h1>
-			<button onClick={bearsActions.increasePopulation}>increase</button>
-		</div>
-	);
+  return (
+    <div>
+      <h1>{bears} bears</h1>
+      <button onClick={bearsActions.increasePopulation}>increase</button>
+    </div>
+  );
 }
 ```
 
@@ -69,66 +69,66 @@ Zustand Fractal allows you to create nested fractal stores for more complex stat
 
 ```typescript
 const BearsManagerStore = createStore(() => ({
-	red: {
-		bears: 0,
-	},
-	green: {
-		bears: 1,
-	},
-	blueList: []
+  red: {
+    bears: 0,
+  },
+  green: {
+    bears: 1,
+  },
+  blueList: []
 }), (set) => ({
-	addBlueBear: (bearsCnt: number) => set(state => state.blueList.push({ bears: bearsCnt })),
-	updateRed: (redBear) => set(state => state.red = readBear),
-	updateGreen: (greenBear) => set(state => state.green = greenBear),
-	updateBlue: (blueBear, index) => set(state => state.blueList[index] = blueBear),
+  addBlueBear: (bearsCnt: number) => set(state => state.blueList.push({ bears: bearsCnt })),
+  updateRed: (redBear) => set(state => state.red = readBear),
+  updateGreen: (greenBear) => set(state => state.green = greenBear),
+  updateBlue: (blueBear, index) => set(state => state.blueList[index] = blueBear),
 }))
 
 function BearsManager() {
-	const bearsManager = useStore(BearsManagerStore);
-	const bearsManagerActions = useActions(BearsManagerStore);
+  const bearsManager = useStore(BearsManagerStore);
+  const bearsManagerActions = useActions(BearsManagerStore);
 
-	return (
-		<div>
-			<h1>red: </h1>
-			<BearStore.Provider
-				rootStore={BearsManagerStore}
-				selector={state => state.red}
-				updator={bearsManagerActions.updateRed}
-			>
-				<BearComponent />
-			</BearStore.Provider>
+  return (
+    <div>
+      <h1>red: </h1>
+      <BearStore.Provider
+        rootStore={BearsManagerStore}
+        selector={state => state.red}
+        updator={bearsManagerActions.updateRed}
+      >
+        <BearComponent />
+      </BearStore.Provider>
 
 
-			<h1>green: </h1>
-			<BearStore.Provider
-				rootStore={BearsManagerStore}
-				selector={state => state.green}
-				updator={bearsManagerActions.updateGreen}
-			>
-				<BearComponent />
-			</BearStore.Provider>
+      <h1>green: </h1>
+      <BearStore.Provider
+        rootStore={BearsManagerStore}
+        selector={state => state.green}
+        updator={bearsManagerActions.updateGreen}
+      >
+        <BearComponent />
+      </BearStore.Provider>
 
-			<h1>blue: </h1>
-			{
-				bearsManager.blueList.map((blueItem, index) => {
-					return (
-						<BearStore.Provider
-							key={index}
-							rootStore={BearsManagerStore}
-							selector={state => state.blueList[index]}
-							updator={(newBlue) => {
-								bearsManagerActions.updateBlue(newBlue, index);
-							}}
-							deps={[]}
-						>
-							<BearComponent />
-						</BearStore.Provider>
-					)
-				})
-			}
-			<button onClick={() => bearsManagerActions.addBlueBear(0)}>add bears</button>
-		</div>
-	);
+      <h1>blue: </h1>
+      {
+        bearsManager.blueList.map((blueItem, index) => {
+          return (
+            <BearStore.Provider
+              key={index}
+              rootStore={BearsManagerStore}
+              selector={state => state.blueList[index]}
+              updator={(newBlue) => {
+                bearsManagerActions.updateBlue(newBlue, index);
+              }}
+              deps={[]}
+            >
+              <BearComponent />
+            </BearStore.Provider>
+          )
+        })
+      }
+      <button onClick={() => bearsManagerActions.addBlueBear(0)}>add bears</button>
+    </div>
+  );
 }
 ```
 
