@@ -9,6 +9,10 @@
     "dev": "tsc -w",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "files": [
+    "lib",
+    "README.md"
+  ],
   "keywords": [],
   "author": "",
   "license": "MIT",
