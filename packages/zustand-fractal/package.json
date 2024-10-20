@@ -1,0 +1,30 @@
+{
+  "name": "zustand-fractal",
+  "version": "1.0.0",
+  "description": "",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc -w",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "zustand": "5.0.0-rc.2"
+  },
+  "peerDependencies": {
+    "@types/react": ">=18.0.0",
+    "immer": ">=9.0.6",
+    "react": ">=18.0.0",
+    "use-sync-external-store": ">=1.2.0"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.17.10",
+    "@types/react": "^18.3.9",
+    "lodash": "^4.17.21",
+    "react": "^18.3.1"
+  }
+}
